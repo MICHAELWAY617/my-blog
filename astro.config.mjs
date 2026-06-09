@@ -11,7 +11,16 @@ import { defineConfig, fontProviders } from 'astro/config';
 export default defineConfig({
 	site: 'https://my-blog-lake-one-53.vercel.app',
 	adapter: vercel(),
-	integrations: [mdx(), sitemap(), react(), keystatic()],
+	integrations: [
+		mdx(),
+		sitemap(),
+		react(),
+		keystatic({
+			clientId: process.env.KEYSTATIC_GITHUB_CLIENT_ID,
+			clientSecret: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET,
+			secret: process.env.KEYSTATIC_SECRET,
+		}),
+	],
 	fonts: [
 		{
 			provider: fontProviders.local(),
