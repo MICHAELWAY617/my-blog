@@ -1,8 +1,15 @@
 ---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <!doctype html>
@@ -13,8 +20,90 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<p>欢迎来到 WayLog。</p>
+			<p>欢迎来到 WayLog，这里记录我的技术开发笔记。</p>
+			{
+				posts.length > 0 ? (
+					<ul class="post-list">
+						{posts.map((post) => (
+							<li>
+								<a href={`/blog/${post.id}/`}>
+									{post.data.heroImage && (
+										<Image width={720} height={360} src={post.data.heroImage} alt="" />
+									)}
+									<h4 class="title">{post.data.title}</h4>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+								</a>
+							</li>
+						))}
+					</ul>
+				) : (
+					<p>还没有文章，敬请期待。</p>
+				)
+			}
 		</main>
 		<Footer />
 	</body>
 </html>
+<style>
+	.post-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	.post-list li {
+		width: calc(50% - 1rem);
+	}
+	.post-list li:first-child {
+		width: 100%;
+		margin-bottom: 1rem;
+		text-align: center;
+	}
+	.post-list li:first-child .title {
+		font-size: 2.369rem;
+	}
+	.post-list li img {
+		margin-bottom: 0.5rem;
+		border-radius: 12px;
+	}
+	.post-list li a {
+		display: block;
+		text-decoration: none;
+		transition: 0.2s ease;
+	}
+	.title {
+		margin: 0;
+		color: rgb(var(--black));
+		line-height: 1;
+	}
+	.date {
+		margin: 0;
+		color: rgb(var(--gray));
+	}
+	.post-list li a:hover h4,
+	.post-list li a:hover .date {
+		color: rgb(var(--accent));
+	}
+	.post-list a:hover img {
+		box-shadow: var(--box-shadow);
+	}
+	@media (max-width: 720px) {
+		.post-list {
+			gap: 0.5em;
+		}
+		.post-list li {
+			width: 100%;
+			text-align: center;
+		}
+		.post-list li:first-child {
+			margin-bottom: 0;
+		}
+		.post-list li:first-child .title {
+			font-size: 1.563em;
+		}
+	}
+</style>
