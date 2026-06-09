@@ -1,6 +1,0 @@
-{
-	"name": "my-blog",
-	"pages_build_output_dir": "dist",
-	"compatibility_date": "2025-06-09",
-	"workers_dev": false
-}
