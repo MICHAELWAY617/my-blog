@@ -3,6 +3,7 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import keystatic from '@keystatic/astro';
+import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
 import { defineConfig, fontProviders } from 'astro/config';
 
@@ -10,7 +11,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 export default defineConfig({
 	site: 'https://my-blog-lake-one-53.vercel.app',
 	adapter: vercel(),
-	integrations: [mdx(), sitemap(), keystatic()],
+	integrations: [mdx(), sitemap(), react(), keystatic()],
 	fonts: [
 		{
 			provider: fontProviders.local(),
