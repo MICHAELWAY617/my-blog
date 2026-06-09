@@ -15,6 +15,7 @@ const today = new Date();
 			>
 		</a>
 	</div>
+	<a class="admin-link" href="/keystatic">管理</a>
 </footer>
 <style>
 	footer {
@@ -34,6 +35,18 @@ const today = new Date();
 		color: rgb(var(--gray));
 	}
 	.social-links a:hover {
+		color: rgb(var(--gray-dark));
+	}
+	.admin-link {
+		display: inline-block;
+		margin-top: 1.5em;
+		font-size: 0.75rem;
+		color: rgb(var(--gray));
+		text-decoration: none;
+		opacity: 0.5;
+	}
+	.admin-link:hover {
+		opacity: 1;
 		color: rgb(var(--gray-dark));
 	}
 </style>
