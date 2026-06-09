@@ -2,7 +2,6 @@
 title: '从零构建 CNN：纯 C++ 手写汉字识别框架开发日志 #1'
 description: '不用 PyTorch，不用 TensorFlow，从矩阵乘法开始搭建一个完整的卷积神经网络。第一期：Matrix 矩阵库、im2col 卷积加速、Tensor 4D 语义封装。'
 pubDate: 'Jun 09 2026'
-heroImage: '../../assets/blog-placeholder-1.jpg'
 ---
 
 ## 动机
